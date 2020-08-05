@@ -1,0 +1,81 @@
+{
+    "data" : [
+   
+      {
+        "name": "Classrooms",
+        "icon": "School",
+        "children": [
+          {
+            "name": "Classroom 1",
+            "url": "/classroom/1",
+            "icon": "School"
+          },
+          {
+            "name": "Classroom 2",
+            "url": "/classroom/2",
+            "icon": "School"
+          },
+          {
+            "name": "Classroom 3",
+            "url": "/classroom/3",
+            "icon": "School"
+          }
+        ]
+      },
+      {
+        "name": "Admin",
+        "icon": "People",
+        "children": [
+          {
+            "name": "Students",
+            "icon": "People",
+            "children": [
+                {
+                  "name": "Add",
+                  "url": "/add/student",
+                  "icon": "People"
+                },
+                {
+                  "name": "Update",
+                  "url": "/edit/student",
+                  "icon": "People"
+                },
+                {
+                  "name": "Delete",
+                  "url": "/delete/student",
+                  "icon": "People"
+                }
+              ]
+          },
+         
+          {
+            "name": "Employee",
+            "icon": "People",
+            "children": [
+              {
+                "name": "Add",
+                "url": "/add/employee",
+                "icon": "People"
+              },
+              {
+                "name": "Update",
+                "url": "/edit/employee",
+                "icon": "People"
+              },
+              {
+                "name": "Delete",
+                "url": "/delete/employee",
+                "icon": "People"
+              }
+            ]
+          }
+         
+        ]
+      },
+      {
+        "name": "Report Archive",
+        "url": "/archive/reports",
+        "icon": "Archive"
+    }
+    ]
+  }

@@ -1,0 +1,11 @@
+.title {
+    text-align: center;
+    color: #cc7a00;
+}
+
+.content {
+    border: 1px solid #cc7a00;
+    margin-top: 7px;
+    padding: 5px;
+    border-radius: 3px;
+}
