@@ -11,16 +11,25 @@ import { Link } from "react-router-dom";
 import People from '@material-ui/icons/People'
 import Archive from '@material-ui/icons/Archive'
 import School from '@material-ui/icons/School'
+import Home from '@material-ui/icons/Home'
 
 
-import './SideMenu.css'
 
-const styles = {
+import { Typography } from "@material-ui/core";
+
+const styles =  (theme) => ({
   list: {
-    width: 300,
+    width: '30rem',
+    border: "2px solid #00FFFF",
+    [theme.breakpoints.down("sm")]: {     
+      fontSize: "1rem",
+      width: '20rem'
+     
+    }
+  
    
    },
-  links: {
+  links: {   
     textDecoration: "none",   
     color:  "#FF8C00",
     '&:hover': {
@@ -33,13 +42,28 @@ const styles = {
  
   menuHeader: {
     paddingLeft: "100px",
-    color: "#FF8C00"
+    color: "#FF8C00",
+  fontSize: "2rem",
+    height: 42,
+    paddingTop: 5,
+    [theme.breakpoints.down("sm")]: {     
+     
+     height: 34
+     
+    }
   },
   icons: {
     color: "#00FFFF"
-  } 
+  } ,
+  text: {
+    fontSize: "2rem",
+    [theme.breakpoints.down("sm")]: {     
+     fontSize: "1.5rem"
+      
+     }
+  }
   
-};
+});
 class MenuBar extends Component {
   constructor(props) {
     super(props);
@@ -49,26 +73,30 @@ class MenuBar extends Component {
   handleClick(item) {
     this.setState(prevState => ({ [item]: !prevState[item] }));
   }
+
+ 
   // if the menu item doesn't have any child, this method simply returns a clickable menu item that redirects to any location and if there is no child this method uses recursion to go until the last level of children and then returns the item by the first condition.
   handler(children) {   
     const { classes } = this.props;
     const { state } = this;    
     return children.map(subOption => {
-      let icon = <People/>
+      let icon = <People color="secondary"/>
       if(subOption.icon === 'Archive') {
-        icon = <Archive/>
+        icon = <Archive color="secondary"/>
       }
       else if(subOption.icon === 'School') {
-        icon = <School />
+        icon = <School color="secondary"/>
+      } else if(subOption.icon === 'Home') {
+        icon = <Home color="secondary"/>
       }
       if (!subOption.children) {
         return (
           <div key={subOption.name} >
-            <ListItem button key={subOption.name} >
-        {icon}
-              <Link to={subOption.url} className= {classes.links} onClick={this.props.drawerClickHandler}>
-                <ListItemText inset primary={subOption.name} />
-              </Link>
+            <ListItem button key={subOption.name} component={Link} to={subOption.url} className= {classes.links} onClick={this.props.drawerClickHandler}>
+        {subOption.level === 1 ? icon : ""}
+             
+        <ListItemText inset primary={<Typography className={classes.text} variant = "h4">{subOption.name}</Typography>} />
+           
             </ListItem>
           </div>
         );
@@ -76,8 +104,8 @@ class MenuBar extends Component {
       return (
         <div key={subOption.name}>
           <ListItem button onClick={() => this.handleClick(subOption.name)}>
-            {icon}
-            <ListItemText className= {classes.links} inset primary={subOption.name} />
+          {subOption.level === 1 ? icon : ""}
+            <ListItemText className= {classes.links} inset={true} primary={<Typography className={classes.text} variant = "h4">{subOption.name}</Typography>} />
             {state[subOption.name] ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
           <Collapse in={state[subOption.name]} timeout="auto" unmountOnExit>
@@ -95,25 +123,26 @@ class MenuBar extends Component {
    
     const { classes} = this.props;
     return (
-      <div className={classes.list}>
-        <Drawer
-         variant="persistent"
+      <div>
+        <Drawer      
+        //  variant="persistent"
           anchor="left"
           open ={this.props.show}
+          onClose={this.props.drawerClickHandler}
          
           classes={{ paper: classes.list}}
         >
-          <div>
-            <List>
-              <ListItem key="menuHeading" divider disableGutters>
+          <div >
+            <List  disablePadding>
+              <ListItem   style={{backgroundColor: "#00FFFF"}} key="menuHeading" divider disableGutters>
                
                 <ListItemText 
-                  className={classes.menuHeader}
-                  inset
-                  primary="Menu"
-                />
+                  className={classes.menuHeader}               
+                  // inset
+                  // primary={<Typography className={classes.text}variant = "h4">Menu</Typography>}
+                >Menu</ListItemText>
               </ListItem>
-              {this.handler(this.props.menuItems.data)}
+              {this.props.menuItems && this.handler(this.props.menuItems)}
             </List>
           </div>
         </Drawer>

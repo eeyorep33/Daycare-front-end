@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import hands from '../../images/hands.jpg'
-import Auth from '../Login/Auth'
-import  './Announcements.css';
-
+import { connect } from 'react-redux';
+import { withStyles } from '@material-ui/styles';
+import { getAnnouncements, getMenu,  getFacility  } from '../../Actions/ApplicationActions'
+import styles from './AnnounceStyles'
+import { Typography } from '@material-ui/core';
 
 
 class Announcements extends Component {
@@ -10,46 +12,29 @@ class Announcements extends Component {
      announcements: null
  }
     componentDidMount() {    
+      localStorage.setItem('route', "/")
         let facility = this.props.facility  
         if(facility ==null) {
             facility = localStorage.getItem('facilityId')
         }
-        fetch('http://localhost:8080/announcement/' + facility, {
-      headers: {
-        Authorization: 'Bearer ' + this.props.token
-      }
-    })
-          .then(res => {
-            if (res.status !== 200) {
-              throw new Error('Failed to fetch status');
-            }
-            return res.json();
-          })
-          .then(resData => {
-            
-            this.setState(prevState => {       
-                return {...prevState,  announcements: resData.announcements
-                }
-             
-            });       
-          })
-          .catch(err => {
-            console.log(err);
-          });
+        this.props.getSideMenuItems()  
+        this.props.getAnnouncements()
+        this.props.getFacility()
+    
     }
 
     
 
     render() {      
        
-      
+      const { classes } = this.props;
        let announce = null
-        if(this.state.announcements) {
-            announce =  (<Auth formType={"announcements"}>
-            <img className="hands" src={hands} alt="hands"/>
-           <div>           
-              <h1 className = "title">Announcements</h1>             
-              {this.state.announcements.map(announcement => {
+        if(this.props.announcements) {
+            announce =  (<React.Fragment formType={"announcements"}>
+            <img className={classes.hands} src={hands} alt="hands"/>
+           <div className={classes.container}>           
+              <h1 className = {classes.title}>Announcements</h1>             
+              {this.props.announcements.map(announcement => {
               let date = new Date (announcement.createdAt)            
               const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date)
               const mo = new Intl.DateTimeFormat('en', { month: 'long' }).format(date)
@@ -71,32 +56,59 @@ class Announcements extends Component {
               date = `${mo} ${da}, ${ye}`
               
            return (
-               <div className = {"content"}key={announcement.id}>
-                   <p>{date}</p>
-                   <p>{announcement.content}</p>
+               <div className = {classes.content}key={announcement.id}>
+                   <Typography color="secondary" className={classes.date}>{date}</Typography>
+                   <Typography>{announcement.content}</Typography>
                </div>
            )
               })}
            </div>
-               </Auth>)
+               </React.Fragment>)
         } else {         
             
-            announce = (<Auth formType={"announcements"}>
-            <img className="hands" src={hands} alt="hands"/>
+            announce = (<React.Fragment formType={"announcements"}>
+            <img className={classes.hands} src={hands} alt="hands"/>
    <div>    
-      <h1 className = "title">Announcements</h1>
+      <h1 className = {classes.title}>Announcements</h1>
       </div>
-      </Auth>)
+      </React.Fragment>)
         }
         return (
-            <Auth>              
+            <React.Fragment>              
                 
   {announce}
-            </Auth>
+            </React.Fragment>
           
         )
         
 };
 }
 
-export default Announcements;
+
+const mapStateToProps = state => {
+  return {
+     menuItems: state.appReducer.menuItems,
+       sideDrawerOpen: state.appReducer.sideDrawerOpen,
+       isAuth: state.appReducer.isAuth,
+      token: state.appReducer.token,
+      user: state.appReducer.user,
+       facilityId: state.appReducer.facilityId,
+      authLoading: state.appReducer.authLoading,
+      announcements: state.appReducer.announcements,
+      error: state.appReducer.error,
+      facility: state.appReducer.facility
+  }
+  } 
+  
+  const mapDispatchToProps = dispatch => {
+  
+    return {      
+      getAnnouncements: () => dispatch(getAnnouncements()),
+      getSideMenuItems: () => dispatch(getMenu()),
+      getFacility: () => dispatch(getFacility())
+  
+    }
+  }
+  export default withStyles(styles)(
+    connect(mapStateToProps, mapDispatchToProps)(Announcements)
+)

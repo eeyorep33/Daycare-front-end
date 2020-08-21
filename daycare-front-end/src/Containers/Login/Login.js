@@ -1,102 +1,131 @@
-import React, {Component} from 'react';
-import Input from '../../Components/Form/Input';
-import Auth from './Auth';
-import { required, length } from '../../util/validators';
-import hands from '../../images/hands.jpg';
-import './Login.css'
-import Button from '../../Components/Button/Button'
+import React, { useState, useEffect } from 'react';
+import Button from '@material-ui/core/Button';
+import SnackBar from '@material-ui/core/Snackbar'
+import useStyles from './LoginInStyles'
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField'
+
+
+const Login = props => {
+const classes = useStyles();
+const  [userName, setUserName] = useState('');
+const [password, setPassword] = useState('');
+const [passwordHelper, setPasswordHelper] = useState('');
+const [userNameHelper, setUserNameHelper] = useState('')
+const [alert, setAlert] = useState({open:false, message: '', backgroundColor: ''})
 
 
 
-
-class Login extends Component {
-    state = {
-        loginForm: {
-          userName: {
-            value: '',
-            valid: false,
-            validators: [required]         
-                    },
-          password: {
-            value: '',
-            valid: false,
-            validators: [required, length({ min: 5 })]          
-          },
-          formIsValid: false
-        }
-      };
-    
-
-      
-
-      inputChangeHandler = (input, value) => {
-        this.setState(prevState => {
-          let isValid = true;          
-          for (const validator of prevState.loginForm[input].validators) {
-            isValid = isValid && validator(value);
-          }
-          const updatedForm = {
-            ...prevState.loginForm,
-            [input]: {
-              ...prevState.loginForm[input],
-              valid: isValid,
-              value: value
-            }
-          };
-          let formIsValid = true;
-          for (const inputName in updatedForm) {
-            formIsValid = formIsValid && updatedForm[inputName].valid;
-          }
-          return {
-            loginForm: updatedForm,
-            formIsValid: formIsValid
-          };
-        });
-      };
-    
+useEffect(() => {
+if(props.error !== null) {
+  setAlert({...alert, open:true, message: props.error, backgroundColor: "orange"})
+  props.clearError()
  
-    
-      render() {
-        
-        return (
-          <Auth formType ={"auth-form"}>
-             <img className="hands" src={hands} alt="hands"/>
-                 
-            <form
-              onSubmit={e =>
-                this.props.onLogin(e, {                   
-                  userName: this.state.loginForm.userName.value,
-                  password: this.state.loginForm.password.value
-                })
-              }
-            >
-              <Input
-                id="userName"
-                label="User Name"
-                type="text"
-                control="input"
-                onChange={this.inputChangeHandler}               
-                value={this.state.loginForm['userName'].value}
-                valid={this.state.loginForm['userName'].valid}
-              
-              />
-              <Input
-                id="password"
-                label="Password"
-                type="password"
-                control="input"
-                onChange={this.inputChangeHandler}            
-                value={this.state.loginForm['password'].value}
-                valid={this.state.loginForm['password'].valid}
-             
-              />
-            <Button design="raised" type="submit" loading={this.props.loading}>Login</Button>
-            </form>            
-            <p className="signup_link">Don't have an Account? Click <a href="/signup">here</a> to enroll your facility.</p>
-           
-          </Auth>
-        );
-      }
+}
+})
+
+const onChange = event => { 
+  console.log(event.target.id)
+  let valid;
+  switch (event.target.id) {
+    case 'userName': 
+    setUserName(event.target.value)    
+valid = event.target.id.length >= 4 ;
+console.log(valid)
+   if(!valid) {
+setUserNameHelper("Please enter a valid User name")
+   } else {
+     setUserNameHelper("")
+   }
+   break;
+   case "password": 
+   setPassword(event.target.value)
+   valid = password.length >= 6 ;
+   console.log(password.length)
+   if(!valid) {
+setPasswordHelper("Please enter a valid Password")
+   } else {
+     setPasswordHelper("")
+   }
+   break;
+   default:
+   break;
+  }
+
+}
+
+return (
+  <React.Fragment>
+    <div className={classes.handsContainer}>
+      <div className={classes.hands}/>
+      </div>
+      <SnackBar
+      styles={{display: "flex", justifyContent: "center"}}
+      open={alert.open} 
+      anchorOrigin={{vertical: "top", horizontal: "center"}}
+       message={alert.message}
+        ContentProps={{style: {
+        backgroundColor: alert.backgroundColor
+      }}
+    }
+    onClose={() => setAlert({...alert, open: false})}
+    autoHideDuration={4000}
+      >
+
+      </SnackBar>
+<Grid container 
+className={classes.gridContainer}> 
+<Grid container item
+ direction="column" 
+className={classes.formContainer} 
+spacing={3} xs={9}>
+<Grid item xs={12} 
+className={classes.textContainer}>
+  <TextField  
+  className={classes.root} 
+  variant="outlined" 
+  fullWidth 
+  error={userNameHelper.length !== 0}
+  id="userName"
+  helperText= {userNameHelper}
+  onChange={onChange} 
+  label="User Name" 
+  value={userName}>    
+  </TextField>
+ 
+</Grid>
+<Grid item xs={12} className={classes.textContainer}>
+  <TextField  className={classes.root}
+   variant="outlined" 
+   fullWidth 
+   type="password"
+   error={passwordHelper.length !== 0}
+   id="password"
+   helperText= {passwordHelper}
+   onChange={onChange}
+   label="Password" 
+   value={password}></TextField>
+</Grid>
+<Grid item xs={12}>
+<Button 
+disabled={userName.length <= 4 || password.length <= 6}
+type="submit" 
+onClick={(e)=> {props.onLogin(e, {userName: userName, password: password})}}
+variant="contained"
+ color="secondary" 
+ className={classes.login}>
+   Login</Button>
+</Grid>
+</Grid>
+</Grid>
+<div  className={classes.signUpLink}>
+<p>Don't have an Account? Click <a href="/signup">here</a> to enroll your facility.</p>
+</div>
+</React.Fragment>
+)
+
 }
 
 export default Login;
+
+
