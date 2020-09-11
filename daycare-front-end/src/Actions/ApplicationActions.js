@@ -8,7 +8,8 @@ export const getUser = (id, token, facility) => {
   return (dispatch) => {
     dispatch(getUserStart());
     axios
-      .get('http://localhost:8080/employee/' + id, {
+      .get(process.env.REACT_APP_API_URL + 'employee/' + id ||
+      'http://localhost:8080/employee/' + id, {
         headers: {
           Authorization: 'Bearer ' + token,
           facilityId: facility,
@@ -36,7 +37,8 @@ export const editUser = (id, token, user) => {
   return (dispatch) => {
     dispatch(editUserStart());
     axios
-      .put('http://localhost:8080/userProfile/' + id, user, {
+      .put(process.env.REACT_APP_API_URL + 'userProfile' + id ||
+      'http://localhost:8080/userProfile/' + id, user, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -65,7 +67,8 @@ export const resetPassword = (passwords, token, user) => {
   return (dispatch) => {
     dispatch(resetPasswordStart());
     return axios
-      .put('http://localhost:8080/reset/password', passwords, {
+      .put(process.env.REACT_APP_API_URL + 'reset/password' ||
+      'http://localhost:8080/reset/password', passwords, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + token,
@@ -95,7 +98,8 @@ export const getMenu = (facility, token, user) => {
   return (dispatch) => {
     dispatch(getMenuStart());
     axios
-      .get('http://localhost:8080/menu/' + facility, {
+      .get(process.env.REACT_APP_API_URL + 'menu/' + facility ||
+      'http://localhost:8080/menu/' + facility, {
         headers: {
           uid: user,
         },
@@ -122,7 +126,8 @@ export const getFacility = (facility, token, user) => {
   return (dispatch) => {
     dispatch(getFacilityStart());
     axios
-      .get('http://localhost:8080/facility/' + facility, {
+      .get(process.env.REACT_APP_API_URL +'facility/' + facility ||
+      'http://localhost:8080/facility/' + facility, {
         headers: {
           Authorization: 'Bearer ' + token,
           uid: user,
@@ -151,7 +156,8 @@ export const editFacility = (facility, id, token, user) => {
   return (dispatch) => {
     dispatch(editFacilityStart());
     axios
-      .put('http://localhost:8080/facility/' + id, facility, {
+      .put(process.env.REACT_APP_API_URL + 'facility/' + id ||
+      'http://localhost:8080/facility/' + id, facility, {
         headers: {
           Authorization: 'Bearer ' + token,
           uid: user,
@@ -180,7 +186,8 @@ export const getAnnouncements = (facility, token) => {
   return (dispatch) => {
     dispatch(getAnnouncementsStart());
     axios
-      .get('http://localhost:8080/announcement/' + facility, {
+      .get(process.env.REACT_APP_API_URL +'announcement/' + facility || 
+      'http://localhost:8080/announcement/' + facility, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -208,7 +215,7 @@ export const editAnnouncements = (token, announcement, id) => {
   return (dispatch) => {
     dispatch(editAnnouncementsStart());
     axios
-      .put('http://localhost:8080/announcement/' + id, announcement, {
+      .put(process.env.REACT_APP_API_URL + 'announcement/' + id ||'http://localhost:8080/announcement/' + id, announcement, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -237,7 +244,7 @@ export const deleteAnnouncements = (token, id, facility, user) => {
   return (dispatch) => {
     dispatch(deleteAnnounceStart());
     axios
-      .delete(
+      .delete(process.env.REACT_APP_API_URL + 'announcement/' + id ||
         'http://localhost:8080/announcement/' + id,
 
         {
@@ -272,7 +279,7 @@ export const addAnnouncement = (token, announcement, user) => {
   return (dispatch) => {
     dispatch(addAnnounceStart());
     axios
-      .post('http://localhost:8080/announcement', announcement, {
+      .post(process.env.REACT_APP_API_URL + 'announcement' || 'http://localhost:8080/announcement', announcement, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + token,
@@ -300,8 +307,9 @@ export const getAuthStart = () => {
 export const getAuth = (auth) => {
   return (dispatch) => {
     dispatch(getAuthStart());
+    console.log(process.env.REACT_APP_API_URL)
     axios
-      .post('http://localhost:8080/login', auth, {
+      .post(process.env.REACT_APP_API_URL + 'login' || 'http://localhost:8080/login', auth, {
         headers: {
           'Content-Type': 'application/json',
         },

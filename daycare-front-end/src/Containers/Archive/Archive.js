@@ -19,6 +19,7 @@ const Archive = (props) => {
     (async () => {
       dispatch(getStudents(token, facility));
     })();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const updateContent = (e) => {

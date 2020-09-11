@@ -9,7 +9,8 @@ export const getClassrooms = (token, facilityId) => {
   return (dispatch) => {
     dispatch(getClassroomsStart());
     axios
-      .get('http://localhost:8080/classrooms', {
+      .get(process.env.REACT_APP_API_URL +'classrooms' ||
+      'http://localhost:8080/classrooms', {
         headers: {
           Authorization: 'Bearer ' + token,
           facilityId: facilityId,
@@ -38,7 +39,8 @@ export const getClassroom = (token, id) => {
   return (dispatch) => {
     dispatch(getClassroomStart());
     axios
-      .get('http://localhost:8080/classroom/' + id, {
+      .get(process.env.REACT_APP_API_URL + 'classroom/'+ id ||
+      'http://localhost:8080/classroom/' + id, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -65,7 +67,8 @@ export const editClassroom = (classroom, id, facility, user, token) => {
   return (dispatch) => {
     dispatch(editClassroomStart());
     axios
-      .put('http://localhost:8080/classroom/' + id, classroom, {
+      .put(process.env.REACT_APP_API_URL + 'classroom/' + id ||
+      'http://localhost:8080/classroom/' + id, classroom, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + token,
@@ -97,7 +100,7 @@ export const deleteClassroom = (id, token, facility, user) => {
   return (dispatch) => {
     dispatch(deleteClassroomStart());
     axios
-      .delete(
+      .delete(process.env.REACT_APP_API_URL + 'classroom/' + id ||
         'http://localhost:8080/classroom/' + id,
 
         {
@@ -135,7 +138,8 @@ export const addClassroom = (token, classroom, user, facility) => {
   return (dispatch) => {
     dispatch(addClassroomStart());
     axios
-      .post('http://localhost:8080/classroom', classroom, {
+      .post(process.env.REACT_APP_API_URL + 'classroom' ||
+      'http://localhost:8080/classroom', classroom, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + token,

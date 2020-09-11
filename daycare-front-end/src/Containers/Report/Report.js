@@ -83,14 +83,14 @@ const Report = (props) => {
     supply_item: '',
   });
 
-  const format = 'h:mm a';
-  const now = moment().hour(6).minute(30);
+ 
   const date = moment().format('MM/DD/YYYY');
 
   useEffect(() => {
     (async () => {
       dispatch(getReport(id, token));
     })();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const closeModal = (type) => {

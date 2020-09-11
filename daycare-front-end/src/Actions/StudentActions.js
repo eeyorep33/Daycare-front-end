@@ -8,7 +8,8 @@ export const getStudents = (token, facility) => {
   return (dispatch) => {
     dispatch(getStudentsStart());
     axios
-      .get('http://localhost:8080/students', {
+      .get(process.env.REACT_APP_API_URL + 'students' ||
+      'http://localhost:8080/students', {
         headers: {
           Authorization: 'Bearer ' + token,
           facilityId: facility,
@@ -37,7 +38,8 @@ export const getSearch = (token, facility, name) => {
   return (dispatch) => {
     dispatch(getSearchStart());
     axios
-      .get('http://localhost:8080/students/search/' + name, {
+      .get(process.env.REACT_APP_API_URL + 'students/search/' + name ||
+      'http://localhost:8080/students/search/' + name, {
         headers: {
           Authorization: 'Bearer ' + token,
           facilityId: facility,
@@ -66,7 +68,8 @@ export const getStudentsByClass = (token, facility, id) => {
   return (dispatch) => {
     dispatch(getStudentsByClassStart());
     axios
-      .get('http://localhost:8080/students/classroom/' + id, {
+      .get(process.env.REACT_APP_API_URL + 'students/classroom/' + id ||
+      'http://localhost:8080/students/classroom/' + id, {
         headers: {
           Authorization: 'Bearer ' + token,
           facilityId: facility,
@@ -95,7 +98,8 @@ export const editStudent = (student, id, token, user, facility) => {
   return (dispatch) => {
     dispatch(editStudentStart());
     return axios
-      .put('http://localhost:8080/student/' + id, student, {
+      .put(process.env.REACT_APP_API_URL + 'student/' + id ||
+      'http://localhost:8080/student/' + id, student, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + token,
@@ -127,7 +131,8 @@ export const updateImage = (id, token, image) => {
   return (dispatch) => {
     dispatch(updateImageStart());
     return axios
-      .put('http://localhost:8080/image/student/' + id, image, {
+      .put(process.env.REACT_APP_API_URL + 'student/' + id ||
+      'http://localhost:8080/image/student/' + id, image, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -156,7 +161,8 @@ export const checkIn = (id, token) => {
   return (dispatch) => {
     dispatch(checkInStart());
     return axios
-      .put('http://localhost:8080/student/checkIn/' + id, null, {
+      .put(process.env.REACT_APP_API_URL + 'student/checkIn/' + id  ||
+      'http://localhost:8080/student/checkIn/' + id, null, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -185,7 +191,8 @@ export const checkOut = (id, token) => {
   return (dispatch) => {
     dispatch(checkOutStart());
     return axios
-      .put('http://localhost:8080/student/checkOut/' + id, null, {
+      .put(process.env.REACT_APP_API_URL + 'student/checkOut/' + id  ||
+      'http://localhost:8080/student/checkOut/' + id, null, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -214,7 +221,7 @@ export const deleteStudent = (id, token, user, facility) => {
   return (dispatch) => {
     dispatch(deleteStudentStart());
     axios
-      .delete(
+      .delete(process.env.REACT_APP_API_URL + 'student/' + id ||
         'http://localhost:8080/student/' + id,
 
         {
@@ -249,7 +256,8 @@ export const addStudent = (student, token, facility, user) => {
   return (dispatch) => {
     dispatch(addStudentStart());
     axios
-      .post('http://localhost:8080/student', student, {
+      .post(process.env.REACT_APP_API_URL + 'student' ||
+      'http://localhost:8080/student', student, {
         headers: {
           Authorization: 'Bearer ' + token,
           uid: user,

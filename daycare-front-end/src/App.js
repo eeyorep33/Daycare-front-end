@@ -71,7 +71,7 @@ class App extends Component {
       adminEmail: authData.adminEmail,
     };
     axios
-      .post('http://localhost:8080/signup', facility, {
+      .post(process.env.REACT_APP_API_URL + 'signup' || "http://localhost:8080/signup", facility, {
         headers: {
           'Content-Type': 'application/json',
         },

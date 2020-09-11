@@ -33,6 +33,7 @@ const AnnounceAdmin = props => {
     (async () => {
       dispatch(getAnnouncements(facilityId, token));
     })();
+     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const openModal=(i, name, type, id)=> {

@@ -30,6 +30,7 @@ const Classroom = (props) => {
     (async () => {
       dispatch(getStudentsByClass(token, facility, id));
     })();
+     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const studentDetails = (student) => {

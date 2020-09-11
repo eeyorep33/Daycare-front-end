@@ -25,6 +25,7 @@ const ReportArchive = (props) => {
     (async () => {
       dispatch(getReportArchive(id, token));
     })();
+     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

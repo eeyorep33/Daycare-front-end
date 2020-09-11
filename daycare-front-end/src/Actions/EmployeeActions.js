@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { editUser } from './ApplicationActions';
+
 
 export const getEmployeesStart = () => {
   return { type: 'GET_EMPLOYEES_START' };
@@ -9,7 +9,8 @@ export const getEmployees = (token, facility, user) => {
   return (dispatch) => {
     dispatch(getEmployeesStart());
     axios
-      .get('http://localhost:8080/employees', {
+      .get(process.env.REACT_APP_API_URL + 'employees' ||
+      'http://localhost:8080/employees', {
         headers: {
           Authorization: 'Bearer ' + token,
           facilityId: facility,
@@ -38,7 +39,8 @@ export const editEmployee = (employee, id, token, user, facility) => {
   return (dispatch) => {
     dispatch(editEmployeeStart());
     return axios
-      .put('http://localhost:8080/employee/' + id, employee, {
+      .put(process.env.REACT_APP_API_URL +'employee/' + id ||
+      'http://localhost:8080/employee/' + id, employee, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + token,
@@ -70,7 +72,7 @@ export const deleteEmployee = (id, token, user, facility) => {
   return (dispatch) => {
     dispatch(deleteEmployeeStart());
     axios
-      .delete(
+      .delete(process.env.REACT_APP_API_URL + 'employee/' + id ||
         'http://localhost:8080/employee/' + id,
 
         {
@@ -105,7 +107,8 @@ export const addEmployee = (employee, token, facility, user) => {
   return (dispatch) => {
     dispatch(addEmployeeStart());
     axios
-      .post('http://localhost:8080/employee', employee, {
+      .post(process.env.REACT_APP_API_URL + 'employee' ||
+      'http://localhost:8080/employee' , employee, {
         headers: {
           Authorization: 'Bearer ' + token,
           uid: user,

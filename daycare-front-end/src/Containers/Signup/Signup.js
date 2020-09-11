@@ -23,7 +23,7 @@ const Signup = (props) => {
     backgroundColor: '',
   });
 
-  useEffect(() => {
+  useEffect(() => {   
     if (props.error !== null) {
       setAlert({
         ...alert,
