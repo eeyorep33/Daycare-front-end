@@ -5,13 +5,12 @@ export const initialState = {
   isAuth: false,
   facilityId: null,
   token: null,
-  sideDrawerOpen: false,
   authLoading: false,
   user: null,
   announcements: null,
   error: null,
   facility: '',
-  success: null
+  success: null,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -23,148 +22,187 @@ const authReducer = (state = initialState, action) => {
       return { ...state, error: action.payload, loading: false };
       break;
     case 'GET_MENU_SUCCESS':
+      if (action.payload.menuItem) {
+        let newItem = state.menuItems[1].children;
+        console.log(state.menuItems[1]);
+        for (let i in newItem) {
+          if (newItem[i].id === action.payload.menuItem.id) {
+            newItem[i] = action.payload.menuItem;
+          }
+        }
+        let newMenuItems = state.menuItems;
+        newMenuItems[1].children = newItem;
+        console.log(newMenuItems);
+        return {
+          ...state,
+          menuItems: newMenuItems,
+          loading: false,
+        };
+      } else {
+        return {
+          ...state,
+          menuItems: action.payload.menuItems.data,
+          loading: false,
+        };
+      }
+
+      break;
+
+    case 'GET_USER_START':
+      return { ...state, loading: true };
+      break;
+    case 'GET_USER_ERROR':
       return {
         ...state,
-        menuItems: action.payload.menuItems.data,
+        error: action.error.response.data.message,
+        loading: false,
+      };
+      break;
+    case 'GET_USER_SUCCESS':
+      return { ...state, user: action.payload.user, loading: false };
+      break;
+
+    case 'GET_FACILITY_START':
+      return { ...state, loading: true };
+      break;
+    case 'GET_FACILITY_ERROR':
+      return { ...state, error: action.payload, loading: false };
+      break;
+    case 'GET_FACILITY_SUCCESS':
+      return {
+        ...state,
+        facility: action.payload,
         loading: false,
       };
       break;
 
-
-      
-      case 'GET_USER_START':
-        return { ...state, loading: true };
-        break;
-      case 'GET_USER_ERROR':
-        return { ...state, error: action.error.response.data.message, loading: false };
-        break;
-      case 'GET_USER_SUCCESS':
-        return { ...state, user: action.payload.user, loading: false };
-        break;
-        
-      case 'GET_FACILITY_START':
-        return { ...state, loading: true };
-        break;
-      case 'GET_FACILITY_ERROR':
-        return { ...state, error: action.payload, loading: false };
-        break;
-      case 'GET_FACILITY_SUCCESS':
-        localStorage.setItem("facility", JSON.stringify(action.payload))
-        return {
-          ...state,
-          facility: action.payload,
-          loading: false,
-        };
-        break;
-
-
-        case 'EDIT_FACILITY_START':
-          return { ...state, loading: true };
-          break;
-        case 'EDIT_FACILITY_ERROR':
-          return { ...state, error: action.error.response.data.message, loading: false };
-          break;
-        case 'EDIT_FACILITY_SUCCESS':                 
-        localStorage.setItem("facility", JSON.stringify(action.payload.facility))
-          return {...state,   facility: action.payload.facility, success:action.payload.message,
-            loading: false,
-          };
-          break;
-
-
-      case 'GET_ANNOUNCE_START':
-        return { ...state, loading: true };
-        break;
-      case 'GET_ANNOUNCE_ERROR':
-        return { ...state, error: action.payload, loading: false };
-        break;
-      case 'GET_ANNOUNCE_SUCCESS':
-        return {
-          ...state,
-          announcements: action.payload.announcements,
-          loading: false,
-        };
-        break;
-
-        case 'EDIT_ANNOUNCE_START':
-          return { ...state, loading: true };
-          break;
-        case 'EDIT_ANNOUNCE_ERROR':
-          return { ...state, error: action.payload, loading: false };
-          break;
-        case 'EDIT_ANNOUNCE_SUCCESS':
-          const announce = [...state.announcements]
-          const announceIndex = state.announcements.findIndex(announce => {
-            return announce.id = action.payload.announcement.id
-          })
-          announce[announceIndex]= action.payload.announcement
-          return {
-            ...state,
-            announcements: announce,
-            loading: false,
-          };
-          break;
-
-          case 'ADD_ANNOUNCE_START':
-          return { ...state, loading: true };
-          break;
-        case 'ADD_ANNOUNCE_ERROR':
-          return { ...state, error: action.payload, loading: false };
-          break;
-        case 'ADD_ANNOUNCE_SUCCESS':                   
-          return {...state, announcements: state.announcements.concat(action.payload.announcement),
-            loading: false,
-          };
-          break;
-
-
-          case 'DELETE_ANNOUNCE_START':
-            return { ...state, loading: true };
-            break;
-          case 'DELETE_ANNOUNCE_ERROR':
-            return { ...state, error: action.payload, loading: false };
-            break;
-          case 'DELETE_ANNOUNCE_SUCCESS':   
-          let copyAnnounce = [...state.announcements]
-          const newIndex = state.announcements.findIndex(announce => {
-            return announce.id === parseInt(action.payload.id)
-          })
-          copyAnnounce.splice(newIndex, 1)                
-            return {...state, announcements: copyAnnounce,
-              loading: false,
-            };
-            break;
-    case 'OPEN_MENU':
-      return { ...state, sideDrawerOpen: true };
+    case 'EDIT_FACILITY_START':
+      return { ...state, loading: true };
       break;
-    case 'CLOSE_MENU':
-      return { ...state, sideDrawerOpen: false };
-      break;
-
-      case 'CLEAR_ERROR':
-        return { ...state, error: null };
-        break;
-        case 'CLEAR_SUCCESS':
-        return { ...state, success: null };
-        break;
-        
-      case 'SET_ERROR':
-        return { ...state, error: action.error };
-        break;
-      case 'LOG_OUT':
-      return initialState;
-      break;
-    case 'CHECK_AUTH':
+    case 'EDIT_FACILITY_ERROR':
       return {
         ...state,
-        token: action.values.token,
-        isAuth: true,
-        facilityId: action.values.facilityId,
+        error: action.error.response.data.message,
+        loading: false,
       };
+      break;
+    case 'EDIT_FACILITY_SUCCESS':
+      return {
+        ...state,
+        facility: action.payload.facility,
+        success: action.payload.message,
+        loading: false,
+      };
+      break;
+
+    case 'GET_ANNOUNCE_START':
+      return { ...state, loading: true };
+      break;
+    case 'GET_ANNOUNCE_ERROR':
+      return { ...state, error: action.payload, loading: false };
+      break;
+    case 'GET_ANNOUNCE_SUCCESS':
+      return {
+        ...state,
+        announcements: action.payload.announcements,
+        loading: false,
+      };
+      break;
+
+    case 'EDIT_ANNOUNCE_START':
+      return { ...state, loading: true };
+      break;
+    case 'EDIT_ANNOUNCE_ERROR':
+      return { ...state, error: action.payload, loading: false };
+      break;
+    case 'EDIT_ANNOUNCE_SUCCESS':
+      const announce = [...state.announcements];
+      const announceIndex = state.announcements.findIndex(announce => {
+        return (announce.id === parseInt(action.payload.announcement.id));
+      });
+      announce[announceIndex] = action.payload.announcement;
+      return {
+        ...state,
+        announcements: announce,
+        loading: false,
+      };
+      break;
+
+    case 'ADD_ANNOUNCE_START':
+      return { ...state, loading: true };
+      break;
+    case 'ADD_ANNOUNCE_ERROR':
+      return { ...state, error: action.payload, loading: false };
+      break;
+    case 'ADD_ANNOUNCE_SUCCESS':
+      return {
+        ...state,
+        announcements: state.announcements.concat(action.payload.announcement),
+        loading: false,
+      };
+      break;
+
+    case 'DELETE_ANNOUNCE_START':
+      return { ...state, loading: true };
+      break;
+    case 'DELETE_ANNOUNCE_ERROR':
+      return { ...state, error: action.payload, loading: false };
+      break;
+    case 'DELETE_ANNOUNCE_SUCCESS':
+      let copyAnnounce = [...state.announcements];
+      const newIndex = state.announcements.findIndex((announce) => {
+        return announce.id === parseInt(action.payload.id);
+      });
+      copyAnnounce.splice(newIndex, 1);
+      return { ...state, announcements: copyAnnounce, loading: false };
+      break;
+
+    case 'RESET_PASSWORD_START':
+      return { ...state, loading: true };
+      break;
+    case 'RESET_PASSWORD_ERROR':
+      return {
+        ...state,
+        error: action.error.response.data.message,
+        loading: false,
+      };
+      break;
+    case 'RESET_PASSWORD_SUCCESS':
+      return { ...state, user: action.payload.user };
+      break;
+    case 'CLEAR_ERROR':
+      return { ...state, error: null };
+      break;
+    case 'CLEAR_SUCCESS':
+      return { ...state, success: null };
+      break;
+
+    case 'SET_ERROR':
+      return { ...state, error: action.error };
+      break;
+    case 'LOG_OUT':
+      return initialState;
+      break;
+    case 'EDIT_USER_SUCCESS':
+      return {
+        ...state,
+        user: action.payload.user,
+      };
+    case 'UPDATE_USER_SUCCESS':
+      return {
+        ...state,
+        user: action.user,
+      };
+      break;
+    case 'EDIT_USER_START':
+      return { ...state, loading: true };
+      break;
+    case 'EDIT_USER_ERROR':
+      return { ...state, error: action.payload, loading: false };
       break;
     case 'UPDATE_MENU':
       const index = action.values.index;
-      const menu = [...state.menuItems];
+      let menu = [...state.menuItems];
       menu[1].children[index] = {
         ...menu[1].children[index],
         name: action.values.name,
@@ -175,15 +213,15 @@ const authReducer = (state = initialState, action) => {
       return { ...state, loading: true };
       break;
     case 'GET_AUTH_ERROR':
-      return { ...state, error: action.error.response.data.message, loading: false };
+      return {
+        ...state,
+        error: action.error.response.data.message,
+        loading: false,
+      };
       break;
     case 'GET_AUTH_SUCCESS':
       if (action.payload.token !== null) {
-        localStorage.setItem("facilityId", action.payload.facilityId)
-        localStorage.setItem("userId", action.payload.user.id)
-        localStorage.setItem("token", action.payload.token)
-        localStorage.setItem("user", JSON.stringify(action.payload.user))
-        
+        localStorage.setItem('token', action.payload.token);
         return {
           ...state,
           isAuth: true,

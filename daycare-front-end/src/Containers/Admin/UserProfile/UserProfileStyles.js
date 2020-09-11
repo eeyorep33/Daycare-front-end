@@ -1,126 +1,136 @@
 const styles = (theme) => ({
-    textContainer: {
-      width: '60%',
-      display: 'flex',
-      justifyContent: 'center',
-      [theme.breakpoints.between('sm', 'md')]: {
-        width: '70%',
-      },
-      [theme.breakpoints.between('xs', 'sm')]: {
-        width: '90%',
-      },
+  radioContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  imagePicker: {
+    display: 'flex',
+    justifyContent: 'center',
+    width: '70rem',
+  },
+  displayImage: {
+    width: 'auto',
+    height: 'auto',
+    maxWidth: '12rem',
+    border: '2px solid #00FFFF',
+    borderRadius: '3px',
+    marginLeft: '3rem',
+    padding: '0',
+    [theme.breakpoints.down('xs')]: {
+      marginLeft: '0',
     },
-    radioContainer: {
-      display: 'flex',
-      justifyContent: 'center',
+  },
+  textContainer: {
+    width: '60%',
+    display: 'flex',
+    justifyContent: 'center',
+    [theme.breakpoints.between('sm', 'md')]: {
+      width: '70%',
     },
-    imagePicker: {
-      display: 'flex',
-      justifyContent: 'center',
-      width: '70rem',
+    [theme.breakpoints.between('xs', 'sm')]: {
+      width: '90%',
     },
-    title: {
-      textAlign: 'center',
+  },
+
+  root: {
+    '& label.Mui-focused': {
       color: 'orange',
-      fontSize: '3rem',
-      [theme.breakpoints.down('xs')]: {
-        minWidth: 50,
-        fontSize: '2rem',
-        marginBottom: '2rem',
+    },
+
+    '& .MuiOutlinedInput-root': {
+      '&.Mui-focused fieldset': {
+        borderColor: 'orange',
       },
     },
-  
-    employeeImage: {
-      width: "8rem",
-      height: "auto"
+  },
+  button: {
+    ...theme.typography.buttons,
+    marginLeft: '20px',
+    marginRight: '10px',
+  },
+  buttonContainer: {
+    marginTop: '30px',
+    display: 'flex',
+    justifyContent: 'center',
+    marginBottom: '3rem',
+  },
+  noImage: {
+    border: '2px solid #00FFFF',
+    width: 'auto',
+    height: '12rem',
+    marginLeft: '4rem',
+    display: 'flex',
+    alignItems: 'center',
+    [theme.breakpoints.down('xs')]: {
+      marginLeft: '0',
     },
-    titleMargin: {
-      marginLeft: '8rem',
-      fontSize: '2rem',
-      [theme.breakpoints.down('sm')]: {
-        marginLeft: '0',
-        fontSize: '1.5rem',
-      },
-    },
-    formContainer: {
-      // justifyContent: 'center',
-      alignItems: 'center',
-      border: '1px solid #00FFFF',
-      borderRadius: '5px',
-      padding: '2rem',
-      marginTop: '10rem',
-      backgroundColor: 'white',
-      [theme.breakpoints.up('sm')]: {
-        marginTop: '15rem',
-      },
-      [theme.breakpoints.down('xs')]: {
-        marginTop: '5rem',
-      },
-    },
-    gridContainer: {
+  },
+ 
+  imageContainer: {
+    display: 'flex',
+    padding: '0',
+
+    marginTop: '2rem',
+    marginLeft: '5rem',
+    [theme.breakpoints.down('xs')]: {
+      marginLeft: '0',
       justifyContent: 'center',
-      // alignItems: 'center',
-      marginBottom: "10rem"
     },
-    button2: {
-      ...theme.typography.buttons,
-      marginRight: '20px',
-      [theme.breakpoints.down('xs')]: {
-        width: '10rem',
-        height: '3rem',
-        fontSize: '1rem',
-        marginRight: '10px',
-      },
-    },
-    radioGroup: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-      marginLeft: '3rem',
-      [theme.breakpoints.down('xs')]: {
-        marginLeft: '0',
-      },
-    },
-    button: {
-      ...theme.typography.buttons,
-      marginRight: '20px',
-    },
-    buttonContainer: {
+  },
+  editButtons: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    [theme.breakpoints.down('xs')]: {
       display: 'flex',
-      alignItems: 'center',
-      marginTop: '10px',
-      marginBottom: '10px',
-      [theme.breakpoints.down('sm')]: {
-        justifyContent: 'center',
-      },
+      justifyContent: 'center',
     },
-    divMargin: {
-      marginBottom: '30px',
-      height: '2px',
-      backgroundColor: '#00FFFF',
+  },
+  title: {
+    textAlign: 'center',
+    color: 'orange',
+    fontSize: '5rem',
+    [theme.breakpoints.down('sm')]: {
+      minWidth: 50,
+      fontSize: '3rem',
     },
-    mobile: {
-      textAlign: 'center',
-      [theme.breakpoints.down('sm')]: {
-        display: 'flex',
-        justifyContent: 'center',
-      },
+  },
+  currentInfo: {
+    marginTop: '2rem',
+    fontSize: '2rem',
+    [theme.breakpoints.down('xs')]: {
+      display: 'flex',
+      justifyContent: 'center',
     },
-    margin: {
-      flexGrow: 1,
-      [theme.breakpoints.down('sm')]: {
-        flexGrow: 0,
-      },
+  },
+  profileInfo: {
+    color: 'orange',
+    fontSize: '2rem',
+  },
+  editButton: {
+    color: '#DE7702',
+    fontSize: '2rem',
+    textTransform: 'none',
+    '&:hover': {
+      color: 'orange',
+      backgroundColor: 'transparent',
     },
-    root: {
-      '& label.Mui-focused': {
-        color: 'orange',
-      },
-      '& .MuiOutlinedInput-root': {
-        '&.Mui-focused fieldset': {
-          borderColor: 'orange',
-        },
-      },
+  },
+  formContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '2rem',
+    marginTop: '10rem',
+    backgroundColor: 'white',
+    [theme.breakpoints.up('sm')]: {
+      marginTop: '10rem',
     },
-  });
-  export default styles;
-  
+    [theme.breakpoints.down('xs')]: {
+      marginTop: '5rem',
+    },
+  },
+  gridContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+export default styles;

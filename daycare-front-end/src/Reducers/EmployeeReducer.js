@@ -10,18 +10,21 @@ const employeeReducer = (state = initialState, action) => {
       return { ...state, loading: true };
       break;
     case 'GET_EMPLOYEES_ERROR':
-      return { ...state, employeeError: action.error.response.data.message, loading: false };
+      return {
+        ...state,
+        employeeError: action.error.response.data.message,
+        loading: false,
+      };
       break;
     case 'GET_EMPLOYEES_SUCCESS':
       return { ...state, employees: action.payload.employees, loading: false };
       break;
 
-  
     case 'EDIT_EMPLOYEE_START':
       return { ...state, loading: true };
       break;
     case 'EDIT_EMPLOYEE_ERROR':
-      console.log("in employee error")
+      console.log('in employee error');
       return {
         ...state,
         employeeError: action.error.response.data.message,
@@ -37,7 +40,7 @@ const employeeReducer = (state = initialState, action) => {
       return { ...state, employees: editEmployee };
       break;
     case 'CLEAR_EMPLOYEE_ERROR':
-      console.log("clearing error")
+      console.log('clearing error');
       return { ...state, employeeError: null };
       break;
     case 'ADD_EMPLOYEE_START':

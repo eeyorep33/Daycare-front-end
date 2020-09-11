@@ -30,10 +30,7 @@ const styles = (theme) => ({
     },
   },
 
-  employeeImage: {
-    width: "8rem",
-    height: "auto"
-  },
+  
   titleMargin: {
     marginLeft: '8rem',
     fontSize: '2rem',
@@ -42,8 +39,7 @@ const styles = (theme) => ({
       fontSize: '1.5rem',
     },
   },
-  formContainer: {
-    // justifyContent: 'center',
+  formContainer: {   
     alignItems: 'center',
     border: '1px solid #00FFFF',
     borderRadius: '5px',
@@ -58,9 +54,8 @@ const styles = (theme) => ({
     },
   },
   gridContainer: {
-    justifyContent: 'center',
-    // alignItems: 'center',
-    marginBottom: "10rem"
+    justifyContent: 'center',  
+    marginBottom: '10rem',
   },
   button2: {
     ...theme.typography.buttons,
@@ -92,6 +87,12 @@ const styles = (theme) => ({
     [theme.breakpoints.down('sm')]: {
       justifyContent: 'center',
     },
+  },
+  footNote: {
+    display: 'flex',
+    justifyContent: 'center',
+    textAlign: 'center',
+    fontSize: '1.2rem',
   },
   divMargin: {
     marginBottom: '30px',

@@ -6,79 +6,69 @@ import './index.css';
 import Signup from './Containers/Signup/Signup';
 import Announcements from './Containers/Home/Announcements';
 import ClassAdmin from './Containers/Admin/Classroom/ClassroomAdmin';
-import AnnounceAdmin from './Containers/Admin/Announcements/AnnouncementsAdmin'
-import EmployeeAdmin from './Containers/Admin/Employee/EmployeeAdmin'
-import FacilityAdmin from './Containers/Admin/Facility/FacilityAdmin'
-import UserProfile from './Containers/Admin/UserProfile/UserProfile'
+import AnnounceAdmin from './Containers/Admin/Announcements/AnnouncementsAdmin';
+import EmployeeAdmin from './Containers/Admin/Employee/EmployeeAdmin';
+import StudentAdmin from './Containers/Admin/Student/StudentAdmin';
+import FacilityAdmin from './Containers/Admin/Facility/FacilityAdmin';
+import UserProfile from './Containers/Admin/UserProfile/UserProfile';
+import Archive from './Containers/Archive/Archive';
+import Report from './Containers/Report/Report';
+import ReportArchive from './Containers/Archive/ReportArchive';
+import ReportList from './Containers/Archive/ReportList';
+import Classroom from './Containers/Classrooms/Classroom';
 import Header from './Components/NavBar/toolbar';
 import { ThemeProvider } from '@material-ui/styles';
-import theme from './util/Theme'
+import theme from './util/Theme';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import {
-  getMenu,
-  getAuth,
-  checkAuth,
-  clearError,
-  setError,
-} from './Actions/ApplicationActions';
+import { getMenu, getAuth } from './Actions/ApplicationActions';
+import IdleTimer from 'react-idle-timer';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.idleTimer = null;
+  }
+  state = {
+    sideDrawerOpen: false,
+  };
   componentDidMount() {
-    if (localStorage.getItem('route') !== null) {
-      if (localStorage.getItem('route') !== '/') {
-        this.props.history.replace(localStorage.getItem('route'));
-      }
-    }
-
-    localStorage.setItem('route', '/');
-    const token = localStorage.getItem('token');
-    const expiryDate = localStorage.getItem('expiryDate');
-    if (!token || !expiryDate) {
+   
+    if (!this.props.token || !this.props.expiryDate) {
       return;
     }
-    if (new Date(expiryDate) <= new Date()) {
+    if (new Date(this.props.expiryDate) <= new Date()) {
       this.logoutHandler();
       return;
     }
 
-    this.props.checkAuth();
-    const userId = localStorage.getItem('userId');
-    const remainingMilliseconds =
-      new Date(expiryDate).getTime() - new Date().getTime();
-    this.setState({ isAuth: true, token: token, userId: userId });
-    this.setAutoLogout(remainingMilliseconds);
-    this.props.getSideMenuItems();
+    this.props.getSideMenuItems(
+      this.props.facilityId,
+      this.props.token,
+      this.props.user.id
+    );
   }
 
   logoutHandler = () => {
-    this.props.logout();
-    localStorage.removeItem('token');
-    localStorage.removeItem('expiryDate');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('facilityId');
+        this.props.logout();
+    localStorage.removeItem('persist:root');
+  
   };
 
   loginHandler = (event, authData) => {
     event.preventDefault();
     const auth = { userName: authData.userName, password: authData.password };
-    this.props.login(auth); 
-    const remainingMilliseconds = 60 * 60 * 1000;
-    const expiryDate = new Date(new Date().getTime() + remainingMilliseconds);
-    localStorage.setItem('expiryDate', expiryDate.toISOString());
-    this.setAutoLogout(remainingMilliseconds);
+    this.props.login(auth);
+
   };
 
   signupHandler = (event, authData) => {
     event.preventDefault();
     const facility = {
       email: authData.facilityEmail,
-      password: authData.password,
       name: authData.facilityName,
       adminName: authData.adminName,
       adminEmail: authData.adminEmail,
-      facilityEmail: authData.facilityEmail,
-      userName: authData.userName,
     };
     axios
       .post('http://localhost:8080/signup', facility, {
@@ -97,29 +87,27 @@ class App extends Component {
           console.log('Error!');
           throw new Error('Enrollment failed!');
         }
-        return res.json();
       })
 
       .catch((err) => {
-        this.props.setError(err.response.data.message);
+        this.props.setError(err);
       });
   };
 
-  setAutoLogout = (milliseconds) => {
-    setTimeout(() => {
+  handleOnIdle(event) {
+    if (this.props.isAuth) {
       this.logoutHandler();
-    }, milliseconds);
-  };
-
+    }
+    console.log('user is idle', event);
+    console.log('last active', this.idleTimer.getLastActiveTime());
+  }
+ 
   drawerToggleClickHandler = () => {
-    if (this.props.sideDrawerOpen) {
-      this.props.closeMenu();
-    } else this.props.openMenu();
+    this.setState({
+      sideDrawerOpen: !this.state.sideDrawerOpen,
+    });
   };
 
-  backdropClickHandler = () => {
-    this.props.closeMenu();
-  };
   render() {
     let routes = (
       <Switch>
@@ -166,63 +154,140 @@ class App extends Component {
               />
             )}
           />
-
+          <Route
+            path="/admin/student"
+            exact
+            render={(props) => (
+              <StudentAdmin
+                {...props}
+                token={this.props.token}
+                facility={this.props.facilityId}
+              />
+            )}
+          />
           <Route
             exact
             path="/admin/classrooms"
             render={(props) => (
-              <ClassAdmin              
+              <ClassAdmin
                 loading={this.props.loading}
                 {...props}
                 token={this.props.token}
               />
             )}
           />
-              <Route
+          <Route
             exact
             path="/user/profile"
             render={(props) => (
-              <UserProfile              
+              <UserProfile
                 loading={this.props.loading}
                 {...props}
                 token={this.props.token}
               />
             )}
           />
-           <Route
+          <Route
             exact
             path="/admin/announcements"
             render={(props) => (
-              <AnnounceAdmin            
+              <AnnounceAdmin
                 loading={this.props.loading}
                 {...props}
                 token={this.props.token}
               />
             )}
           />
-             <Route
+          <Route
             exact
             path="/admin/facility"
             render={(props) => (
-              <FacilityAdmin            
+              <FacilityAdmin
                 loading={this.props.loading}
                 {...props}
                 token={this.props.token}
               />
             )}
           />
-            <Route
+          <Route
             exact
             path="/admin/employee"
             render={(props) => (
-              <EmployeeAdmin            
+              <EmployeeAdmin
                 loading={this.props.loading}
                 {...props}
                 token={this.props.token}
               />
             )}
           />
-         {/* // <Redirect to="/" /> */}
+          <Route
+            exact
+            path="/classroom/:id"
+            render={(props) => (
+              <Classroom
+                loading={this.props.loading}
+                {...props}
+                token={this.props.token}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/report/archive"
+            render={(props) => (
+              <Archive
+                loading={this.props.loading}
+                {...props}
+                token={this.props.token}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/admin/employee"
+            render={(props) => (
+              <EmployeeAdmin
+                loading={this.props.loading}
+                {...props}
+                token={this.props.token}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/report/list/:id"
+            render={(props) => (
+              <ReportList
+                loading={this.props.loading}
+                {...props}
+                token={this.props.token}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/report/:id"
+            render={(props) => (
+              <Report
+                loading={this.props.loading}
+                {...props}
+                token={this.props.token}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/report/archive/:id"
+            render={(props) => (
+              <ReportArchive
+                loading={this.props.loading}
+                {...props}
+                token={this.props.token}
+              />
+            )}
+          />
+
+          {/* // <Redirect to="/" /> */}
         </Switch>
       );
     }
@@ -231,15 +296,22 @@ class App extends Component {
     if (this.props.isAuth && this.props.menuItems) {
       menu = (
         <MenuBar
-          show={this.props.sideDrawerOpen}
+          show={this.state.sideDrawerOpen}
           drawerClickHandler={this.drawerToggleClickHandler}
           menuItems={this.props.menuItems}
-        
         />
       );
     }
     return (
       <ThemeProvider theme={theme}>
+        <IdleTimer
+          ref={(ref) => {
+            this.idleTimer = ref;
+          }}
+          timeout={1000 * 60 * 15}
+          onIdle={() => this.handleOnIdle()}
+          debounce={250}
+        />
         <Header
           isAuth={this.props.isAuth}
           open={this.drawerToggleClickHandler}
@@ -247,7 +319,6 @@ class App extends Component {
           user={this.props.user}
         />
         {menu}
-        {/* {backdrop} */}
         {routes}
       </ThemeProvider>
     );
@@ -256,34 +327,21 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    // classrooms: state.classroomReducer.classrooms,
     menuItems: state.appReducer.menuItems,
-    sideDrawerOpen: state.appReducer.sideDrawerOpen,
     isAuth: state.appReducer.isAuth,
     token: state.appReducer.token,
     user: state.appReducer.user,
     facilityId: state.appReducer.facilityId,
     authLoading: state.appReducer.authLoading,
     error: state.appReducer.error,
-    classError: state.classroomReducer.classError
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getSideMenuItems: () => dispatch(getMenu()),
+    getSideMenuItems: (facility, token, user) =>
+      dispatch(getMenu(facility, token, user)),
     login: (auth) => dispatch(getAuth(auth)),
-    openMenu: () => dispatch({ type: 'OPEN_MENU' }),
-    closeMenu: () => dispatch({ type: 'CLOSE_MENU' }),
-    checkAuth: () =>
-      dispatch({
-        type: 'CHECK_AUTH',
-        values: {
-          isAuth: true,
-          token: localStorage.getItem('token'),
-          facilityId: localStorage.getItem('facilityId'),
-        },
-      }),
     logout: () => dispatch({ type: 'LOG_OUT' }),
     clearError: () => dispatch({ type: 'CLEAR_ERROR' }),
     setError: (error) => dispatch({ type: 'SET_ERROR', error: error }),
