@@ -38,7 +38,7 @@ export const getReportArchive = (id, token) => {
   return (dispatch) => {
     dispatch(getReportArchiveStart());
     axios
-      .get(process.env.REACT_APP_API_URL + 'archive/' + id ||
+      .get(process.env.REACT_APP_API_URL + 'report/archive/' + id ||
       'http://localhost:8080/report/archive/' + id, {
         headers: {
           Authorization: 'Bearer ' + token,

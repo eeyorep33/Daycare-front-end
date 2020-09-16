@@ -130,6 +130,7 @@ class EmployeeAdmin extends Component {
     }
     if (type === 'email') {
       valid = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(e);
+      console.log(valid)
     } else {
       valid = e.length > 0;
     }
