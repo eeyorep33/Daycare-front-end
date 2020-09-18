@@ -9,7 +9,7 @@ export const getClassrooms = (token, facilityId) => {
   return (dispatch) => {
     dispatch(getClassroomsStart());
     axios
-      .get(process.env.REACT_APP_API_URL +'classrooms' ||
+      .get('https://helping-hand-node.herokuapp.com/classrooms' ||
       'http://localhost:8080/classrooms', {
         headers: {
           Authorization: 'Bearer ' + token,
@@ -39,7 +39,7 @@ export const getClassroom = (token, id) => {
   return (dispatch) => {
     dispatch(getClassroomStart());
     axios
-      .get(process.env.REACT_APP_API_URL + 'classroom/'+ id ||
+      .get('https://helping-hand-node.herokuapp.com/classroom/'+ id ||
       'http://localhost:8080/classroom/' + id, {
         headers: {
           Authorization: 'Bearer ' + token,
@@ -67,7 +67,7 @@ export const editClassroom = (classroom, id, facility, user, token) => {
   return (dispatch) => {
     dispatch(editClassroomStart());
     axios
-      .put(process.env.REACT_APP_API_URL + 'classroom/' + id ||
+      .put( 'https://helping-hand-node.herokuapp.com/classroom/' + id ||
       'http://localhost:8080/classroom/' + id, classroom, {
         headers: {
           'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ export const deleteClassroom = (id, token, facility, user) => {
   return (dispatch) => {
     dispatch(deleteClassroomStart());
     axios
-      .delete(process.env.REACT_APP_API_URL + 'classroom/' + id ||
+      .delete('https://helping-hand-node.herokuapp.com/classroom/' + id ||
         'http://localhost:8080/classroom/' + id,
 
         {
@@ -138,7 +138,7 @@ export const addClassroom = (token, classroom, user, facility) => {
   return (dispatch) => {
     dispatch(addClassroomStart());
     axios
-      .post(process.env.REACT_APP_API_URL + 'classroom' ||
+      .post('https://helping-hand-node.herokuapp.com/classroom' ||
       'http://localhost:8080/classroom', classroom, {
         headers: {
           'Content-Type': 'application/json',

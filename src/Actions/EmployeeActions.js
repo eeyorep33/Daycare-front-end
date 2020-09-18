@@ -9,7 +9,7 @@ export const getEmployees = (token, facility, user) => {
   return (dispatch) => {
     dispatch(getEmployeesStart());
     axios
-      .get(process.env.REACT_APP_API_URL + 'employees' ||
+      .get('https://helping-hand-node.herokuapp.com/employees' ||
       'http://localhost:8080/employees', {
         headers: {
           Authorization: 'Bearer ' + token,
@@ -39,7 +39,7 @@ export const editEmployee = (employee, id, token, user, facility) => {
   return (dispatch) => {
     dispatch(editEmployeeStart());
     return axios
-      .put(process.env.REACT_APP_API_URL +'employee/' + id ||
+      .put('https://helping-hand-node.herokuapp.com/employee/' + id ||
       'http://localhost:8080/employee/' + id, employee, {
         headers: {
           'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ export const deleteEmployee = (id, token, user, facility) => {
   return (dispatch) => {
     dispatch(deleteEmployeeStart());
     axios
-      .delete(process.env.REACT_APP_API_URL + 'employee/' + id ||
+      .delete('https://helping-hand-node.herokuapp.com/employee/' + id ||
         'http://localhost:8080/employee/' + id,
 
         {
@@ -107,7 +107,7 @@ export const addEmployee = (employee, token, facility, user) => {
   return (dispatch) => {
     dispatch(addEmployeeStart());
     axios
-      .post(process.env.REACT_APP_API_URL + 'employee' ||
+      .post('https://helping-hand-node.herokuapp.com/employee' ||
       'http://localhost:8080/employee' , employee, {
         headers: {
           Authorization: 'Bearer ' + token,
