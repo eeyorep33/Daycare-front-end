@@ -9,8 +9,8 @@ export const getEmployees = (token, facility, user) => {
   return (dispatch) => {
     dispatch(getEmployeesStart());
     axios
-      .get('https://helping-hand-node.herokuapp.com/employees' ||
-      'http://localhost:8080/employees', {
+      .get('https://helping-hand-node.herokuapp.com/employees' 
+      , {
         headers: {
           Authorization: 'Bearer ' + token,
           facilityId: facility,
@@ -39,8 +39,8 @@ export const editEmployee = (employee, id, token, user, facility) => {
   return (dispatch) => {
     dispatch(editEmployeeStart());
     return axios
-      .put('https://helping-hand-node.herokuapp.com/employee/' + id ||
-      'http://localhost:8080/employee/' + id, employee, {
+      .put('https://helping-hand-node.herokuapp.com/employee/' + id 
+     , employee, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + token,
@@ -72,8 +72,8 @@ export const deleteEmployee = (id, token, user, facility) => {
   return (dispatch) => {
     dispatch(deleteEmployeeStart());
     axios
-      .delete('https://helping-hand-node.herokuapp.com/employee/' + id ||
-        'http://localhost:8080/employee/' + id,
+      .delete('https://helping-hand-node.herokuapp.com/employee/' + id 
+       ,
 
         {
           headers: {
@@ -107,8 +107,8 @@ export const addEmployee = (employee, token, facility, user) => {
   return (dispatch) => {
     dispatch(addEmployeeStart());
     axios
-      .post('https://helping-hand-node.herokuapp.com/employee' ||
-      'http://localhost:8080/employee' , employee, {
+      .post('https://helping-hand-node.herokuapp.com/employee' 
+       , employee, {
         headers: {
           Authorization: 'Bearer ' + token,
           uid: user,

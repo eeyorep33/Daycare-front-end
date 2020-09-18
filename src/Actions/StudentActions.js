@@ -8,8 +8,8 @@ export const getStudents = (token, facility) => {
   return (dispatch) => {
     dispatch(getStudentsStart());
     axios
-      .get('https://helping-hand-node.herokuapp.com/students' ||
-      'http://localhost:8080/students', {
+      .get('https://helping-hand-node.herokuapp.com/students' 
+      , {
         headers: {
           Authorization: 'Bearer ' + token,
           facilityId: facility,
@@ -38,8 +38,8 @@ export const getSearch = (token, facility, name) => {
   return (dispatch) => {
     dispatch(getSearchStart());
     axios
-      .get('https://helping-hand-node.herokuapp.com/students/search/' + name ||
-      'http://localhost:8080/students/search/' + name, {
+      .get('https://helping-hand-node.herokuapp.com/students/search/' + name
+     , {
         headers: {
           Authorization: 'Bearer ' + token,
           facilityId: facility,
@@ -68,8 +68,8 @@ export const getStudentsByClass = (token, facility, id) => {
   return (dispatch) => {
     dispatch(getStudentsByClassStart());
     axios
-      .get('https://helping-hand-node.herokuapp.com/students/classroom/' + id ||
-      'http://localhost:8080/students/classroom/' + id, {
+      .get('https://helping-hand-node.herokuapp.com/students/classroom/' + id
+      , {
         headers: {
           Authorization: 'Bearer ' + token,
           facilityId: facility,
@@ -98,8 +98,8 @@ export const editStudent = (student, id, token, user, facility) => {
   return (dispatch) => {
     dispatch(editStudentStart());
     return axios
-      .put('https://helping-hand-node.herokuapp.com/student/' + id ||
-      'http://localhost:8080/student/' + id, student, {
+      .put('https://helping-hand-node.herokuapp.com/student/' + id
+     , student, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + token,
@@ -131,8 +131,8 @@ export const updateImage = (id, token, image) => {
   return (dispatch) => {
     dispatch(updateImageStart());
     return axios
-      .put('https://helping-hand-node.herokuapp.com/student/' + id ||
-      'http://localhost:8080/image/student/' + id, image, {
+      .put('https://helping-hand-node.herokuapp.com/student/' + id
+     , image, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -161,8 +161,8 @@ export const checkIn = (id, token) => {
   return (dispatch) => {
     dispatch(checkInStart());
     return axios
-      .put('https://helping-hand-node.herokuapp.com/student/checkIn/' + id  ||
-      'http://localhost:8080/student/checkIn/' + id, null, {
+      .put('https://helping-hand-node.herokuapp.com/student/checkIn/' + id  
+   , null, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -191,8 +191,8 @@ export const checkOut = (id, token) => {
   return (dispatch) => {
     dispatch(checkOutStart());
     return axios
-      .put('https://helping-hand-node.herokuapp.com/student/checkOut/' + id  ||
-      'http://localhost:8080/student/checkOut/' + id, null, {
+      .put('https://helping-hand-node.herokuapp.com/student/checkOut/' + id  
+     , null, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -221,8 +221,8 @@ export const deleteStudent = (id, token, user, facility) => {
   return (dispatch) => {
     dispatch(deleteStudentStart());
     axios
-      .delete('https://helping-hand-node.herokuapp.com/student/' + id ||
-        'http://localhost:8080/student/' + id,
+      .delete('https://helping-hand-node.herokuapp.com/student/' + id 
+     ,
 
         {
           headers: {
@@ -256,8 +256,8 @@ export const addStudent = (student, token, facility, user) => {
   return (dispatch) => {
     dispatch(addStudentStart());
     axios
-      .post('https://helping-hand-node.herokuapp.com/student' ||
-      'http://localhost:8080/student', student, {
+      .post('https://helping-hand-node.herokuapp.com/student'
+  , student, {
         headers: {
           Authorization: 'Bearer ' + token,
           uid: user,

@@ -9,8 +9,8 @@ export const getReport = (id, token) => {
   return (dispatch) => {
     dispatch(getReportStart());
     axios
-      .get('https://helping-hand-node.herokuapp.com/report/' + id ||
-      'http://localhost:8080/report/' + id, {
+      .get('https://helping-hand-node.herokuapp.com/report/' + id
+     , {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -38,8 +38,8 @@ export const getReportArchive = (id, token) => {
   return (dispatch) => {
     dispatch(getReportArchiveStart());
     axios
-      .get('https://helping-hand-node.herokuapp.com/report/archive/' + id ||
-      'http://localhost:8080/report/archive/' + id, {
+      .get('https://helping-hand-node.herokuapp.com/report/archive/' + id 
+      , {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -67,8 +67,8 @@ export const getReportList = (id, token) => {
   return (dispatch) => {
     dispatch(getReportListStart());
     axios
-      .get('https://helping-hand-node.herokuapp.com/report/list/' + id ||
-      'http://localhost:8080/report/list/' + id, {
+      .get('https://helping-hand-node.herokuapp.com/report/list/' + id 
+     , {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -98,8 +98,8 @@ export const deleteFeeding = (id, token) => {
   return (dispatch) => {
     dispatch(deleteFeedingStart());
     axios
-      .delete('https://helping-hand-node.herokuapp.com/feeding/' + id ||
-        'http://localhost:8080/feeding/' + id,
+      .delete('https://helping-hand-node.herokuapp.com/feeding/' + id 
+     ,
 
         {
           headers: {
@@ -131,8 +131,8 @@ export const addFeeding = (feeding, token) => {
   return (dispatch) => {
     dispatch(addFeedingStart());
     axios
-      .post('https://helping-hand-node.herokuapp.com/feeding' ||
-      'http://localhost:8080/feeding', feeding, {
+      .post('https://helping-hand-node.herokuapp.com/feeding' 
+     , feeding, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -160,8 +160,8 @@ export const editFeeding = (feeding, id, token) => {
   return (dispatch) => {
     dispatch(editFeedingStart());
     return axios
-      .put('https://helping-hand-node.herokuapp.com/feeding/' + id ||
-      'http://localhost:8080/feeding/' + id, feeding, {
+      .put('https://helping-hand-node.herokuapp.com/feeding/' + id
+     , feeding, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + token,
@@ -193,8 +193,8 @@ export const deleteDiapering = (id, token) => {
   return (dispatch) => {
     dispatch(deleteDiaperingStart());
     axios
-      .delete('https://helping-hand-node.herokuapp.com/diapering/' + id ||
-        'http://localhost:8080/diapering/' + id,
+      .delete('https://helping-hand-node.herokuapp.com/diapering/' + id 
+       ,
 
         {
           headers: {
@@ -226,8 +226,8 @@ export const addDiapering = (diapering, token) => {
   return (dispatch) => {
     dispatch(addFeedingStart());
     axios
-      .post('https://helping-hand-node.herokuapp.com/diapering' ||
-      'http://localhost:8080/diapering', diapering, {
+      .post('https://helping-hand-node.herokuapp.com/diapering' 
+      , diapering, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -255,8 +255,8 @@ export const editDiapering = (diapering, id, token) => {
   return (dispatch) => {
     dispatch(editDiaperingStart());
     return axios
-      .put('https://helping-hand-node.herokuapp.com/diapering/' + id ||
-      'http://localhost:8080/diapering/' + id, diapering, {
+      .put('https://helping-hand-node.herokuapp.com/diapering/' + id 
+     , diapering, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + token,
@@ -288,8 +288,8 @@ export const deleteNap = (id, token) => {
   return (dispatch) => {
     dispatch(deleteNapStart());
     axios
-      .delete('https://helping-hand-node.herokuapp.com/naptime/' + id ||
-        'http://localhost:8080/naptime/' + id,
+      .delete('https://helping-hand-node.herokuapp.com/naptime/' + id 
+      ,
 
         {
           headers: {
@@ -321,8 +321,8 @@ export const addNaptime = (nap, token) => {
   return (dispatch) => {
     dispatch(addNapStart());
     axios
-      .post('https://helping-hand-node.herokuapp.com/naptime' ||
-      'http://localhost:8080/naptime', nap, {
+      .post('https://helping-hand-node.herokuapp.com/naptime' 
+  , nap, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -350,8 +350,8 @@ export const editNap = (nap, id, token) => {
   return (dispatch) => {
     dispatch(editNapStart());
     return axios
-      .put('https://helping-hand-node.herokuapp.com/naptime/' + id  ||
-      'http://localhost:8080/naptime/' + id, nap, {
+      .put('https://helping-hand-node.herokuapp.com/naptime/' + id  
+     , nap, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + token,
@@ -383,8 +383,8 @@ export const deleteMeds = (id, token) => {
   return (dispatch) => {
     dispatch(deleteMedsStart());
     axios
-      .delete('https://helping-hand-node.herokuapp.com/medicine/' + id ||
-        'http://localhost:8080/medicine/' + id,
+      .delete('https://helping-hand-node.herokuapp.com/medicine/' + id 
+      ,
 
         {
           headers: {
@@ -416,8 +416,8 @@ export const addMeds = (med, token) => {
   return (dispatch) => {
     dispatch(addMedsStart());
     axios
-      .post('https://helping-hand-node.herokuapp.com/medicine' ||
-      'http://localhost:8080/medicine', med, {
+      .post('https://helping-hand-node.herokuapp.com/medicine' 
+     , med, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -445,8 +445,8 @@ export const editMeds = (med, id, token) => {
   return (dispatch) => {
     dispatch(editMedsStart());
     return axios
-      .put('https://helping-hand-node.herokuapp.com/medicine/' + id ||
-      'http://localhost:8080/medicine/' + id, med, {
+      .put('https://helping-hand-node.herokuapp.com/medicine/' + id 
+      , med, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + token,
@@ -478,8 +478,8 @@ export const deletePlaytime = (id, token) => {
   return (dispatch) => {
     dispatch(deletePlaytimeStart());
     axios
-      .delete('https://helping-hand-node.herokuapp.com/playtime/' + id ||
-        'http://localhost:8080/playtime/' + id,
+      .delete('https://helping-hand-node.herokuapp.com/playtime/' + id 
+        ,
 
         {
           headers: {
@@ -511,8 +511,8 @@ export const addPlaytime = (play, token) => {
   return (dispatch) => {
     dispatch(addPlaytimeStart());
     axios
-      .post('https://helping-hand-node.herokuapp.com/playtime' ||
-      'http://localhost:8080/playtime', play, {
+      .post('https://helping-hand-node.herokuapp.com/playtime' 
+      , play, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -540,8 +540,8 @@ export const editPlaytime = (play, id, token) => {
   return (dispatch) => {
     dispatch(editPlaytimeStart());
     return axios
-      .put('https://helping-hand-node.herokuapp.com/playtime/' + id ||
-      'http://localhost:8080/playtime/' + id, play, {
+      .put('https://helping-hand-node.herokuapp.com/playtime/' + id 
+     , play, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + token,
@@ -573,8 +573,8 @@ export const deleteComment = (id, token) => {
   return (dispatch) => {
     dispatch(deleteCommentStart());
     axios
-      .delete('https://helping-hand-node.herokuapp.com/comment/' + id ||
-        'http://localhost:8080/comment/' + id,
+      .delete('https://helping-hand-node.herokuapp.com/comment/' + id
+       ,
 
         {
           headers: {
@@ -606,8 +606,8 @@ export const addComment = (comment, token) => {
   return (dispatch) => {
     dispatch(addCommentStart());
     axios
-      .post('https://helping-hand-node.herokuapp.com/comment' ||
-      'http://localhost:8080/comment', comment, {
+      .post('https://helping-hand-node.herokuapp.com/comment' 
+     , comment, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -635,8 +635,8 @@ export const editComment = (comment, id, token) => {
   return (dispatch) => {
     dispatch(editCommentStart());
     return axios
-      .put('https://helping-hand-node.herokuapp.com/comment/' + id ||
-      'http://localhost:8080/comment/' + id, comment, {
+      .put('https://helping-hand-node.herokuapp.com/comment/' + id 
+      , comment, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + token,
@@ -668,8 +668,8 @@ export const deleteSupplies = (id, token) => {
   return (dispatch) => {
     dispatch(deleteCommentStart());
     axios
-      .delete('https://helping-hand-node.herokuapp.com/supplies/' + id ||
-        'http://localhost:8080/supplies/' + id,
+      .delete('https://helping-hand-node.herokuapp.com/supplies/' + id 
+       ,
 
         {
           headers: {
@@ -701,8 +701,8 @@ export const addSupplies = (supply, token) => {
   return (dispatch) => {
     dispatch(addSuppliesStart());
     axios
-      .post('https://helping-hand-node.herokuapp.com/supplies' ||
-      'http://localhost:8080/supplies', supply, {
+      .post('https://helping-hand-node.herokuapp.com/supplies' 
+      , supply, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -730,8 +730,8 @@ export const editSupplies = (supply, id, token) => {
   return (dispatch) => {
     dispatch(editSuppliesStart());
     return axios
-      .put('https://helping-hand-node.herokuapp.com/supplies/' + id ||
-      'http://localhost:8080/supplies/' + id, supply, {
+      .put('https://helping-hand-node.herokuapp.com/supplies/' + id 
+     , supply, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + token,
