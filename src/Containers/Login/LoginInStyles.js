@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: `url(${hands})`,
     backgroundPosition: 'bottom-center',
     backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
+    backgroundSize: 'cover', 
     width: '80rem',
     height: '80rem',
     position: 'fixed',
@@ -73,6 +73,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 'auto',
     display: 'block',
     marginTop: '30px',
+    fontSize: "1rem"
   },
   root: {
     '& label.Mui-focused': {
