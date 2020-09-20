@@ -72,7 +72,7 @@ class App extends Component {
     };
     axios
       .post( 'https://helping-hand-node.herokuapp.com/signup' 
-      || "http://localhost:8080/signup", facility, {
+      , facility, {
         headers: {
           'Content-Type': 'application/json',
         },

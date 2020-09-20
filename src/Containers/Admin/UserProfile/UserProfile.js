@@ -175,7 +175,7 @@ class UserProfile extends Component {
     );
     if (this.props.user) {
       if (this.props.user.image !== null && this.props.user.image !== '') {
-        image = 'http://localhost:8080/' + this.props.user.image;
+        image = 'https://helping-hand-node.herokuapp.com/' + this.props.user.image;
         displayImage = (
           <Grid item xs={12} sm={2} className={classes.radioContainer}>
             <img className={classes.displayImage} src={image} alt="None" />

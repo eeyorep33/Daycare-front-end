@@ -63,7 +63,7 @@ const DialogModal = (props) => {
       active = props.student.is_active.toString();
       emailShow = 'text';
       if (props.student.image !== null && props.student.image !== '') {
-        image = 'http://localhost:8080/' + props.student.image;
+        image = 'https://helping-hand-node.herokuapp.com/' + props.student.image;
         displayImage = (
           <Grid item xs={12} sm={3} className={classes.radioContainer}>
             <img className={classes.displayImage} src={image} alt="None" />
@@ -91,7 +91,7 @@ const DialogModal = (props) => {
         props.component[props.index].is_admin === true ? 'Yes' : 'No';
       adminShow = true;
       if (props.employee.image !== null && props.employee.image !== '') {
-        image = 'http://localhost:8080/' + props.employee.image;
+        image = 'https://helping-hand-node.herokuapp.com/' + props.employee.image;
         displayImage = (
           <Grid item xs={12} sm={3} className={classes.radioContainer}>
             <img className={classes.displayImage} src={image} alt="None" />

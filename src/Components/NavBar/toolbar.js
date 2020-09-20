@@ -19,7 +19,7 @@ const Header = (props) => {
     let user = props.user;
     if (user) {
       let userImage = user.image;
-      image = 'http://localhost:8080/' + userImage;
+      image = 'https://helping-hand-node.herokuapp.com/' + userImage;
     }
   } catch (err) {
     console.log(err);
