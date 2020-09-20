@@ -371,7 +371,7 @@ class UserProfile extends Component {
                         this.updateContent(e.target.value, 'email')
                       }
                       error={this.state.emailHelper.length > 0}
-                      helperText={this.state.emailHelper}
+                      helperText={this.state.emailHelper} 
                     />
                   </Grid>
                   <Grid item xs={12} className={classes.radioContainer}>
