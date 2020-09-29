@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import styles from './UserProfileStyles';
 import TextField from '@material-ui/core/TextField';
 import { StyledDropZone } from 'react-drop-zone';
-import { editUser, resetPassword } from '../../../Components/Actions/ApplicationActions';
+import { editUser, resetPassword } from '../../../Actions/ApplicationActions';
 
 class UserProfile extends Component {
   state = {
