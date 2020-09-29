@@ -275,7 +275,7 @@ export const addAnnouncement = (token, announcement, user) => {
     dispatch(addAnnounceStart());
     axios
       .post('https://helping-hand-node.herokuapp.com/announcement'
-      , {
+      ,announcement, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + token,

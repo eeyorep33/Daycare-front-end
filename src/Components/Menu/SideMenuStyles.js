@@ -1,6 +1,6 @@
 const styles = (theme) => ({
   list: {
-    width: '30rem',
+    width: '25rem',
     border: '2px solid #00FFFF',
     [theme.breakpoints.down('sm')]: {
       fontSize: '1rem',
