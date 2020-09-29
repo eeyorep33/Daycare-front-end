@@ -21,6 +21,7 @@ const styles = (theme) => ({
   },
   margin: {
     flexGrow: 1,
+    fontSize: "2rem",
     [theme.breakpoints.down('sm')]: {
       flexGrow: 0,
     },

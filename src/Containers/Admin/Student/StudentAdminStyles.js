@@ -15,6 +15,9 @@ const styles = (theme) => ({
     display: 'flex',
     justifyContent: 'center',
     width: '70rem',
+    border: "2px dashed #00FFFF",
+    fontFamily: "'El Messiri', sans-serif;",
+    color: "orange"
   },
   title: {
     textAlign: 'center',

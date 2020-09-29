@@ -407,11 +407,12 @@ class StudentAdmin extends Component {
                         );
                       })}
                 </Select>
-              </FormControl>
+              </FormControl> 
             </Grid>
 
-            <Grid item xs={12} className={classes.imagePicker}>
+            <Grid item xs={12}>
               <StyledDropZone
+              className={classes.imagePicker}
                 children={label}
                 onDrop={(file, text) => this.setImage(file)}
               />

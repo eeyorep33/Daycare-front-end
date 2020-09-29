@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import styles from './UserProfileStyles';
 import TextField from '@material-ui/core/TextField';
 import { StyledDropZone } from 'react-drop-zone';
-import { editUser, resetPassword } from '../../../Actions/ApplicationActions';
+import { editUser, resetPassword } from '../../../Components/Actions/ApplicationActions';
 
 class UserProfile extends Component {
   state = {
@@ -369,7 +369,7 @@ class UserProfile extends Component {
                       style={{ marginBottom: '10px' }}
                       onChange={(e) =>
                         this.updateContent(e.target.value, 'email')
-                      }
+                      } 
                       error={this.state.emailHelper.length > 0}
                       helperText={this.state.emailHelper} 
                     />
