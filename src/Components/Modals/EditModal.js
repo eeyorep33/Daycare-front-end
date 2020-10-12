@@ -173,20 +173,23 @@ const DialogModal = (props) => {
                 helperText={props.nameHelper}
               />
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                id="email"
-                type={emailShow}
-                name="email"
-                value={email}
-                className={classes.input}
-                style={{ marginBottom: '10px' }}
-                onChange={props.change}
-                error={emailHelper.length > 0}
-                helperText={emailHelper}
-              />
-            </Grid>
+            {props.type !== 'Announcement' && (
+ <Grid item xs={12}>
+ <TextField
+   variant="outlined"
+   id="email"
+   type={emailShow}
+   name="email"
+   value={email}
+   className={classes.input}
+   style={{ marginBottom: '10px' }}
+   onChange={props.change}
+   error={emailHelper.length > 0}
+   helperText={emailHelper}
+ />
+</Grid>
+            )}
+           
             {props.type === 'Student' && (
               <Grid item xs={12} className={classes.radioContainer}>
                 <FormControl variant="outlined">
