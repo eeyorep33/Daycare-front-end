@@ -71,6 +71,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     width: '70rem',
+    border: "2px dashed #00FFFF",
+    fontFamily: "'El Messiri', sans-serif;",
+    color: "orange"
   },
   titleMargin: {
     marginLeft: '8rem',

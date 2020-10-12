@@ -44,8 +44,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundPosition: 'bottom-center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    width: '80rem',
-    height: '80rem',
+    width: '60rem',
+    height: '60rem',
     position: 'fixed',
     zIndex: '-200',
     opacity: '0.2',
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.between('xs', 'sm')]: {
       width: '40rem',
       height: '40rem',
-      marginTop: '5rem',
+      marginTop: '5rem', 
     },
     [theme.breakpoints.between('sm', 'md')]: {
       width: '60rem',

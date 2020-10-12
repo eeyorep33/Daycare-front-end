@@ -305,7 +305,7 @@ export const getAuth = (auth) => {
     dispatch(getAuthStart());
     console.log(process.env.REACT_APP_API_URL)
     axios
-      .post('https://helping-hand-node.herokuapp.com/login' 
+      .post(process.env.REACT_APP_API_URL + 'login' 
      , auth, {
         headers: {
           'Content-Type': 'application/json',

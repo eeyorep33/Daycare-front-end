@@ -286,8 +286,10 @@ const DialogModal = (props) => {
             )}
 
             {activeShow && (
-              <Grid item xs={12} className={classes.imagePicker}>
-                <StyledDropZone children={label} onDrop={props.drop} />
+              <Grid item xs={12} >
+                <StyledDropZone 
+                className={classes.imagePicker}
+                children={label} onDrop={props.drop} />
               </Grid>
             )}
           </Grid>
