@@ -9,7 +9,7 @@ export const getEmployees = (token, facility, user) => {
   return (dispatch) => {
     dispatch(getEmployeesStart());
     axios
-      .get('https://helping-hand-node.herokuapp.com/employees' 
+      .get(process.env.REACT_APP_API_URL + 'employees' 
       , {
         headers: {
           Authorization: 'Bearer ' + token,
@@ -39,7 +39,7 @@ export const editEmployee = (employee, id, token, user, facility) => {
   return (dispatch) => {
     dispatch(editEmployeeStart());
     return axios
-      .put('https://helping-hand-node.herokuapp.com/employee/' + id 
+      .put(process.env.REACT_APP_API_URL + 'employee/' + id 
      , employee, {
         headers: {
           'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ export const deleteEmployee = (id, token, user, facility) => {
   return (dispatch) => {
     dispatch(deleteEmployeeStart());
     axios
-      .delete('https://helping-hand-node.herokuapp.com/employee/' + id 
+      .delete(process.env.REACT_APP_API_URL + 'employee/' + id 
        ,
 
         {
@@ -107,7 +107,7 @@ export const addEmployee = (employee, token, facility, user) => {
   return (dispatch) => {
     dispatch(addEmployeeStart());
     axios
-      .post('https://helping-hand-node.herokuapp.com/employee' 
+      .post(process.env.REACT_APP_API_URL + 'employee' 
        , employee, {
         headers: {
           Authorization: 'Bearer ' + token,

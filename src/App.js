@@ -71,7 +71,7 @@ class App extends Component {
       adminEmail: authData.adminEmail,
     };
     axios
-      .post( 'https://helping-hand-node.herokuapp.com/signup' 
+      .post( process.env.REACT_APP_API_URL + 'signup' 
       , facility, {
         headers: {
           'Content-Type': 'application/json',

@@ -8,7 +8,7 @@ export const getStudents = (token, facility) => {
   return (dispatch) => {
     dispatch(getStudentsStart());
     axios
-      .get('https://helping-hand-node.herokuapp.com/students' 
+      .get(process.env.REACT_APP_API_URL + 'students' 
       , {
         headers: {
           Authorization: 'Bearer ' + token,
@@ -38,7 +38,7 @@ export const getSearch = (token, facility, name) => {
   return (dispatch) => {
     dispatch(getSearchStart());
     axios
-      .get('https://helping-hand-node.herokuapp.com/students/search/' + name
+      .get(process.env.REACT_APP_API_URL + 'students/search/' + name
      , {
         headers: {
           Authorization: 'Bearer ' + token,
@@ -68,7 +68,7 @@ export const getStudentsByClass = (token, facility, id) => {
   return (dispatch) => {
     dispatch(getStudentsByClassStart());
     axios
-      .get('https://helping-hand-node.herokuapp.com/students/classroom/' + id
+      .get(process.env.REACT_APP_API_URL + 'students/classroom/' + id
       , {
         headers: {
           Authorization: 'Bearer ' + token,
@@ -98,7 +98,7 @@ export const editStudent = (student, id, token, user, facility) => {
   return (dispatch) => {
     dispatch(editStudentStart());
     return axios
-      .put('https://helping-hand-node.herokuapp.com/student/' + id
+      .put(process.env.REACT_APP_API_URL + 'student/' + id
      , student, {
         headers: {
           'Content-Type': 'application/json',
@@ -131,7 +131,7 @@ export const updateImage = (id, token, image) => {
   return (dispatch) => {
     dispatch(updateImageStart());
     return axios
-      .put('https://helping-hand-node.herokuapp.com/student/' + id
+      .put(process.env.REACT_APP_API_URL + 'student/' + id
      , image, {
         headers: {
           Authorization: 'Bearer ' + token,
@@ -161,7 +161,7 @@ export const checkIn = (id, token) => {
   return (dispatch) => {
     dispatch(checkInStart());
     return axios
-      .put('https://helping-hand-node.herokuapp.com/student/checkIn/' + id  
+      .put(process.env.REACT_APP_API_URL + 'student/checkIn/' + id  
    , null, {
         headers: {
           Authorization: 'Bearer ' + token,
@@ -191,7 +191,7 @@ export const checkOut = (id, token) => {
   return (dispatch) => {
     dispatch(checkOutStart());
     return axios
-      .put('https://helping-hand-node.herokuapp.com/student/checkOut/' + id  
+      .put(process.env.REACT_APP_API_URL + 'student/checkOut/' + id  
      , null, {
         headers: {
           Authorization: 'Bearer ' + token,
@@ -221,7 +221,7 @@ export const deleteStudent = (id, token, user, facility) => {
   return (dispatch) => {
     dispatch(deleteStudentStart());
     axios
-      .delete('https://helping-hand-node.herokuapp.com/student/' + id 
+      .delete(process.env.REACT_APP_API_URL + 'student/' + id 
      ,
 
         {
@@ -256,7 +256,7 @@ export const addStudent = (student, token, facility, user) => {
   return (dispatch) => {
     dispatch(addStudentStart());
     axios
-      .post('https://helping-hand-node.herokuapp.com/student'
+      .post(process.env.REACT_APP_API_URL + 'student'
   , student, {
         headers: {
           Authorization: 'Bearer ' + token,

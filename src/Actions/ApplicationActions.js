@@ -8,7 +8,7 @@ export const getUser = (id, token, facility) => {
   return (dispatch) => {
     dispatch(getUserStart());
     axios
-      .get('https://helping-hand-node.herokuapp.com/employee/' + id, {
+      .get(process.env.REACT_APP_API_URL + 'employee/' + id, {
         headers: {
           Authorization: 'Bearer ' + token,
           facilityId: facility,
@@ -36,7 +36,7 @@ export const editUser = (id, token, user) => {
   return (dispatch) => {
     dispatch(editUserStart());
     axios
-      .put('https://helping-hand-node.herokuapp.com/userProfile/' + id, user, {
+      .put(process.env.REACT_APP_API_URL + 'userProfile/' + id, user, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -65,7 +65,7 @@ export const resetPassword = (passwords, token, user) => {
   return (dispatch) => {
     dispatch(resetPasswordStart());
     return axios
-      .put('https://helping-hand-node.herokuapp.com/reset/password', passwords, {
+      .put(process.env.REACT_APP_API_URL + 'reset/password', passwords, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + token,
@@ -95,7 +95,7 @@ export const getMenu = (facility, token, user) => {
   return (dispatch) => {
     dispatch(getMenuStart());
     axios
-      .get('https://helping-hand-node.herokuapp.com/menu/' + facility, {
+      .get(process.env.REACT_APP_API_URL + 'menu/' + facility, {
         headers: {
           uid: user,
         },
@@ -122,7 +122,7 @@ export const getFacility = (facility, token, user) => {
   return (dispatch) => {
     dispatch(getFacilityStart());
     axios
-      .get('https://helping-hand-node.herokuapp.com/facility/' + facility, {
+      .get(process.env.REACT_APP_API_URL + 'facility/' + facility, {
         headers: {
           Authorization: 'Bearer ' + token,
           uid: user,
@@ -151,7 +151,7 @@ export const editFacility = (facility, id, token, user) => {
   return (dispatch) => {
     dispatch(editFacilityStart());
     axios
-      .put('https://helping-hand-node.herokuapp.com/facility/' + id, facility, {
+      .put(process.env.REACT_APP_API_URL + 'facility/' + id, facility, {
         headers: {
           Authorization: 'Bearer ' + token,
           uid: user,
@@ -180,7 +180,7 @@ export const getAnnouncements = (facility, token) => {
   return (dispatch) => {
     dispatch(getAnnouncementsStart());
     axios
-      .get('https://helping-hand-node.herokuapp.com/announcement/' + facility 
+      .get(process.env.REACT_APP_API_URL + 'announcement/' + facility 
     , {
         headers: {
           Authorization: 'Bearer ' + token,
@@ -209,7 +209,7 @@ export const editAnnouncements = (token, announcement, id) => {
   return (dispatch) => {
     dispatch(editAnnouncementsStart());
     axios
-      .put('https://helping-hand-node.herokuapp.com/announcement/' + id
+      .put(process.env.REACT_APP_API_URL + 'announcement/' + id
       , announcement, {
         headers: {
           Authorization: 'Bearer ' + token,
@@ -239,7 +239,7 @@ export const deleteAnnouncements = (token, id, facility, user) => {
   return (dispatch) => {
     dispatch(deleteAnnounceStart());
     axios
-      .delete('https://helping-hand-node.herokuapp.com/announcement/' + id 
+      .delete(process.env.REACT_APP_API_URL + 'announcement/' + id 
       ,
 
         {
@@ -274,7 +274,7 @@ export const addAnnouncement = (token, announcement, user) => {
   return (dispatch) => {
     dispatch(addAnnounceStart());
     axios
-      .post('https://helping-hand-node.herokuapp.com/announcement'
+      .post(process.env.REACT_APP_API_URL + 'announcement'
       ,announcement, {
         headers: {
           'Content-Type': 'application/json',
