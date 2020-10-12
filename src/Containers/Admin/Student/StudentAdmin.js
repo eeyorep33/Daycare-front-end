@@ -346,8 +346,8 @@ class StudentAdmin extends Component {
             item
             direction="column"
             className={classes.formContainer}
-            spacing={3}
-            xs={9}
+            //spacing={3}
+            xs={12}
           >
             <Typography className={classes.title}>Add a Student</Typography>
             <Grid item xs={12} className={classes.textContainer}>

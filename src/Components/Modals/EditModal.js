@@ -173,7 +173,7 @@ const DialogModal = (props) => {
                 helperText={props.nameHelper}
               />
             </Grid>
-            {props.type !== 'Announcement' && (
+            {props.type !== 'Announcement' && props.type !== 'Classroom' &&(
  <Grid item xs={12}>
  <TextField
    variant="outlined"

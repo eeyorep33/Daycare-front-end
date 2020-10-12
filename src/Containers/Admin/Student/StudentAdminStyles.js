@@ -17,7 +17,10 @@ const styles = (theme) => ({
     width: '70rem',
     border: "2px dashed #00FFFF",
     fontFamily: "'El Messiri', sans-serif;",
-    color: "orange"
+    color: "orange",
+    [theme.breakpoints.down('sm')]: {
+    width: "20rem"
+    },
   },
   title: {
     textAlign: 'center',
@@ -31,6 +34,9 @@ const styles = (theme) => ({
   },
   dropdown: {
     width: '47rem',
+    [theme.breakpoints.down('sm')]: {
+      width: "27rem"
+      },
   },
 
   formContainer: {
