@@ -298,7 +298,7 @@ const DialogModal = (props) => {
           </Grid>
 
           <TextField
-            variant="outlined"
+           // variant="outlined"
             id="id"
             type="hidden"
             name="id"
